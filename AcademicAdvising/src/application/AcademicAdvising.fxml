@@ -67,7 +67,7 @@
             </TableView>
          </children>
       </HBox>
-      <HBox fx:id="headerBox" alignment="TOP_CENTER" layoutX="254.0" layoutY="24.0" prefHeight="254.0" prefWidth="386.0" style="-fx-background-color: F8B800;" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="0.0">
+      <HBox fx:id="headerBox" alignment="TOP_CENTER" layoutX="245.0" layoutY="33.0" prefHeight="245.0" prefWidth="395.0" style="-fx-background-color: F8B800;" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="0.0">
          <children>
             <PieChart prefHeight="254.0" prefWidth="381.0" title="Students Advised" HBox.hgrow="NEVER">
                <HBox.margin>
@@ -76,7 +76,7 @@
             </PieChart>
          </children>
       </HBox>
-      <ImageView fitHeight="254.0" fitWidth="260.0" layoutY="24.0" preserveRatio="true">
+      <ImageView fitHeight="245.0" fitWidth="282.0" layoutY="33.0" preserveRatio="true">
          <image>
             <Image url="@VCU%20_Logo.jpg" />
          </image>
