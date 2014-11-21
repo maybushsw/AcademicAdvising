@@ -22,15 +22,7 @@
                   <ChoiceBox layoutX="566.0" layoutY="31.0" prefWidth="150.0">
                   
                   </ChoiceBox>
-                  <Label layoutX="412.0" layoutY="90.0" text="Academic Advising:" />
-                  <ChoiceBox layoutX="566.0" layoutY="85.0" prefWidth="150.0">
-                  
-                  </ChoiceBox>
-                  <Label layoutX="412.0" layoutY="143.0" text="Date:" />
-                  <DatePicker layoutX="566.0" layoutY="138.0" prefHeight="31.0" prefWidth="150.0" />
                   <Button layoutX="665.0" layoutY="193.0" mnemonicParsing="false" text="Save" />
-                  <ChoiceBox layoutX="201.0" layoutY="193.0" prefWidth="150.0" />
-                  <Label layoutX="21.0" layoutY="198.0" text="Graduation Application:" />
                </children>
             </AnchorPane>
          </children>
