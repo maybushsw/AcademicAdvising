@@ -110,7 +110,7 @@ public class Student {
         if (this == otherStudent)
         {
             System.err.println("Student.equals() ERROR: the argument is a reference to itself");
-            return false;
+            return true;
         }
         
         if (otherStudent instanceof Student)
