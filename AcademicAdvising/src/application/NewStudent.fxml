@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="newStudentPane" maxHeight="-Infinity" maxWidth="5000.0" minHeight="10.0" minWidth="10.0" prefHeight="248.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="248.0" prefWidth="715.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <TextField layoutX="201.0" layoutY="31.0" prefHeight="31.0" prefWidth="150.0" />
+                  <Label layoutX="23.0" layoutY="36.0" text="First Name:" />
+                  <Label layoutX="23.0" layoutY="90.0" text="Last Name:" />
+                  <TextField layoutX="201.0" layoutY="85.0" prefHeight="31.0" prefWidth="150.0" />
+                  <Label layoutX="24.0" layoutY="143.0" text="VID:" />
+                  <TextField layoutX="201.0" layoutY="138.0" prefHeight="31.0" prefWidth="150.0" />
+                  <Label layoutX="412.0" layoutY="36.0" text="Grade:" />
+                  <ChoiceBox layoutX="566.0" layoutY="31.0" prefWidth="150.0">
+                  
+                  </ChoiceBox>
+                  <Label layoutX="412.0" layoutY="90.0" text="Academic Advising:" />
+                  <ChoiceBox layoutX="566.0" layoutY="85.0" prefWidth="150.0">
+                  
+                  </ChoiceBox>
+                  <Label layoutX="412.0" layoutY="143.0" text="Date:" />
+                  <DatePicker layoutX="566.0" layoutY="138.0" prefHeight="31.0" prefWidth="150.0" />
+                  <Button layoutX="665.0" layoutY="193.0" mnemonicParsing="false" text="Save" />
+                  <ChoiceBox layoutX="201.0" layoutY="193.0" prefWidth="150.0" />
+                  <Label layoutX="21.0" layoutY="198.0" text="Graduation Application:" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
