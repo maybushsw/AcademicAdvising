@@ -95,7 +95,7 @@ public class AcademicAdvisingController {
     void initialize() {
         assert newStudentMenu != null : "fx:id=\"newStudentMenu\" was not injected: check your FXML file 'AcademicAdvising.fxml'.";
         
-        sList = new account.StudentList("C:\\Users\\smaybush.BIZPORTBIZ\\Eclipse Workspace\\AcademicAdvising\\src\\account\\Academic.txt").getStudentList();
+        sList = new account.StudentList("Academic.txt").getStudentList();
         
         ColFName.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
         colLName.setCellValueFactory(cellData-> cellData.getValue().getLastNameProperty());
