@@ -1,5 +1,7 @@
 package account;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,17 +11,17 @@ public class Student {
     private StringProperty sMiddleName;
     private StringProperty sStudentId;
     private StringProperty sGrade;  
-    private StringProperty sAdvising;
+    private BooleanProperty sAdvising;
     private StringProperty sAdvisingDate;
     
     // constructor
-    public Student(String a_sFirstName, String a_sMiddleName, String a_sLastName, String a_sId, String a_sGrade, String a_sAdvising, String a_sDate) {
+    public Student(String a_sFirstName, String a_sMiddleName, String a_sLastName, String a_sId, String a_sGrade, Boolean a_sAdvising, String a_sDate) {
         sFirstName = new SimpleStringProperty(a_sFirstName);
         sLastName = new SimpleStringProperty(a_sLastName);
         sMiddleName = new SimpleStringProperty(a_sMiddleName);
         sStudentId = new SimpleStringProperty(a_sId);
         sGrade = new SimpleStringProperty(a_sGrade);
-        sAdvising = new SimpleStringProperty(a_sAdvising);
+        sAdvising = new SimpleBooleanProperty(a_sAdvising);
         sAdvisingDate = new SimpleStringProperty(a_sDate);
     }
     
@@ -40,12 +42,17 @@ public class Student {
         this.sGrade.set(a_sGrade);
     }
  
-    public void setAdvising (String a_sAdvising) {
+    public void setAdvising (Boolean a_sAdvising) {
         this.sAdvising.set(a_sAdvising);
     }
     
     public void setAdvisingDate (String a_sDate) {
         this.sAdvisingDate.set(a_sDate);
+    }
+    
+    public void setStudentId (String a_VID){
+    	
+    	this.sStudentId.set(a_VID);
     }
     
     // Getter methods
@@ -88,11 +95,11 @@ public class Student {
         return sGrade;
     }
     
-    public String getAdvising () {
+    public Boolean getAdvising () {
         return sAdvising.get();
     }
     
-    public StringProperty getAdvisingProperty () {
+    public BooleanProperty getAdvisingProperty () {
         return sAdvising;
     }
     

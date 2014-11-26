@@ -68,7 +68,7 @@ public class StudentList {
                 String sLName  = ""; 
                 String sId     = "";             
                 String sGrade  = "";
-                String sAdvice = "";
+                Boolean sAdvice = false;
                 String sDate   = "";
                 
                 for (int i = 0; i < studentInfo.length; i++) {
@@ -78,7 +78,7 @@ public class StudentList {
                         case 2: sLName  = studentInfo[2].substring(0, studentInfo[2].length()); break;
                         case 3: sId     = studentInfo[3].substring(0, studentInfo[3].length()); break;
                         case 4: sGrade  = studentInfo[4].substring(0, studentInfo[4].length()); break;
-                        case 5: sAdvice = studentInfo[5].substring(0, studentInfo[5].length()); break;
+                        case 5: sAdvice = Boolean.valueOf(studentInfo[5].substring(0, studentInfo[5].length())); break;
                         case 6: sDate   = studentInfo[6].substring(0, studentInfo[6].length()); break;
                         default: break;
                     }
@@ -102,7 +102,7 @@ public class StudentList {
         {           
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(a_sFileName, true)));
             out.println(a_student.getFirstName() + "," + a_student.getMiddleName() + "," + a_student.getLastName() + "," +
-                        a_student.getStudentId() + "," + a_student.getGrade() + "," + a_student.getAdvising() + "," + a_student.getAdvisingDate());
+                        a_student.getStudentId() + "," + a_student.getGrade() + "," + a_student.getAdvising().toString() + "," + a_student.getAdvisingDate());
             out.close();
         }
         catch (Exception ex)
@@ -111,7 +111,7 @@ public class StudentList {
         }
     }
     
-    private void writeStudentListToFile(String a_sFileName) {
+    public void writeStudentListToFile(String a_sFileName) {
         
         try
         {           
@@ -152,7 +152,7 @@ public class StudentList {
                     case 2: s.setMiddleName(a_sNewValue); break;
                     case 3: s.setLastName(a_sNewValue); break;
                     case 4: s.setGrade(a_sNewValue); break;
-                    case 5: s.setAdvising(a_sNewValue); break;
+                    case 5: s.setAdvising(Boolean.valueOf(a_sNewValue)); break;
                     case 6: s.setAdvisingDate(a_sNewValue); break;
                     default: break;
                 } 

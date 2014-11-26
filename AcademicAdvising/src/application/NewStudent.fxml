@@ -6,23 +6,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="newStudentPane" maxHeight="-Infinity" maxWidth="5000.0" minHeight="10.0" minWidth="10.0" prefHeight="248.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="newStudentPane" maxHeight="-Infinity" maxWidth="5000.0" minHeight="10.0" minWidth="10.0" prefHeight="248.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewStudentPaneController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="248.0" prefWidth="715.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField layoutX="201.0" layoutY="31.0" prefHeight="31.0" prefWidth="150.0" />
+                  <TextField fx:id="newSFirstName" layoutX="201.0" layoutY="31.0" prefHeight="31.0" prefWidth="150.0" />
                   <Label layoutX="23.0" layoutY="36.0" text="First Name:" />
                   <Label layoutX="23.0" layoutY="90.0" text="Last Name:" />
-                  <TextField layoutX="201.0" layoutY="85.0" prefHeight="31.0" prefWidth="150.0" />
+                  <TextField fx:id="newSLastName" layoutX="201.0" layoutY="85.0" prefHeight="31.0" prefWidth="150.0" />
                   <Label layoutX="24.0" layoutY="143.0" text="VID:" />
-                  <TextField layoutX="201.0" layoutY="138.0" prefHeight="31.0" prefWidth="150.0" />
+                  <TextField fx:id="newSVID" layoutX="201.0" layoutY="138.0" prefHeight="31.0" prefWidth="150.0" />
                   <Label layoutX="412.0" layoutY="36.0" text="Grade:" />
-                  <ChoiceBox layoutX="566.0" layoutY="31.0" prefWidth="150.0">
+                  <ChoiceBox fx:id="newSGrade" layoutX="566.0" layoutY="31.0" prefWidth="150.0">
                   
                   </ChoiceBox>
-                  <Button layoutX="665.0" layoutY="193.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="newStudentSave" layoutX="665.0" layoutY="193.0" mnemonicParsing="false" onAction="#newStudentButtonHandler" text="Save" />
                </children>
             </AnchorPane>
          </children>
