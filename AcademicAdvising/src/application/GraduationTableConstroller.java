@@ -64,6 +64,7 @@ public class GraduationTableConstroller {
 	    private TableColumn<Student, Boolean> colGDelete;
 	    
 	    
+	    //Public method for data exchange and access.
 	    public void setStudentList(StudentList mList){
 	    	
 	    	sList = mList;
@@ -91,7 +92,9 @@ public class GraduationTableConstroller {
 	        assert colGFirstName != null : "fx:id=\"colGFirstName\" was not injected: check your FXML file 'GraduationTable.fxml'.";
 	        assert colGLastNmae != null : "fx:id=\"colGLastNmae\" was not injected: check your FXML file 'GraduationTable.fxml'.";
 	        assert colGTotalGPA != null : "fx:id=\"colGTotalGPA\" was not injected: check your FXML file 'GraduationTable.fxml'.";
-
+	        
+	        
+	        //call backs for columns
 	        Callback<TableColumn<Student,String>, TableCell<Student,String>> cellFactory = new Callback<TableColumn<Student, String>, TableCell<Student,String>>() {
 	            @Override
 	            public TableCell<Student,String> call(TableColumn<Student,String> p) {
@@ -114,7 +117,7 @@ public class GraduationTableConstroller {
 	        };
 	        
 	        
-	        
+	        //add data and callbacks to columns
 	        colGFirstName.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
 	        colGFirstName.setCellFactory(cellFactory);
 	        colGLastNmae.setCellValueFactory(cellData-> cellData.getValue().getLastNameProperty());
@@ -132,6 +135,9 @@ public class GraduationTableConstroller {
 	        colGSubDate.setCellValueFactory(cellData -> cellData.getValue().getGradSubmissionDateProperty());
 	        colGTotalGPA.setCellValueFactory(cellData -> cellData.getValue().getTotalGPAProperty());
 	        colGTotalGPA.setCellFactory(doubleCellFactory);
+	        
+	        
+	        //Delete button column
 	        colGDelete.setCellValueFactory(
 	        		new Callback<TableColumn.CellDataFeatures<Student, Boolean>,
 	        		ObservableValue<Boolean>>() {
@@ -153,6 +159,9 @@ public class GraduationTableConstroller {
 	        
 	        
 	        gradTable.setEditable(true);
+	        
+	        
+	        //Actions events for editing calls of columns
 	        
 	        colGFirstName.setOnEditCommit(new EventHandler<CellEditEvent<Student,String>>(){
 	     	   @Override

@@ -43,7 +43,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
         	
-        	
+        	//Load the initial Window
         	setUserAgentStylesheet(STYLESHEET_CASPIAN);
         	FXMLLoader loader = new FXMLLoader(Main.class.getResource("AcademicAdvising.fxml"));
             AnchorPane page = (AnchorPane) loader.load(); 
@@ -56,6 +56,7 @@ public class Main extends Application {
             primaryStage.show();
             
             
+            //On close action event to save data
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
             	
             	@Override

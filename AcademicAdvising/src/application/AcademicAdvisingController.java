@@ -12,16 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import javax.swing.event.DocumentEvent.EventType;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.SetChangeListener.Change;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,10 +54,7 @@ public class AcademicAdvisingController {
     @FXML
     private HBox headerBox;
     
-    public void setHeaderBox(Node myBox){
-    	headerBox = (HBox) myBox;
-    }
-    
+   
     
     
     @FXML
@@ -112,6 +105,14 @@ public class AcademicAdvisingController {
     
     
     
+    //public functions for data exchange
+    
+    public void setHeaderBox(Node myBox){
+    	headerBox = (HBox) myBox;
+    }
+    
+   
+    
     public void setStudentList(StudentList mList){
     	
     	sList = mList;
@@ -122,6 +123,8 @@ public class AcademicAdvisingController {
     	return sList;
     }
     
+    
+    //Action event for Import
 
     @FXML
     void importMenuItemHandler(ActionEvent event) {
@@ -139,25 +142,35 @@ public class AcademicAdvisingController {
 
     }
     
+    //Action event for advising view
+    
     @FXML
     void advisingMenuButtonHandler(ActionEvent event) {
     	
    
     tableBox.getChildren().clear();
     tableBox.getChildren().setAll(advisingTable);
-    
+    headerBox.getChildren().clear();
+    headerBox.getChildren().setAll(advisingChart);
     
    
 
     }
 
+    
+    //Action Event for graduation view
     @FXML
     void graduationMenuButtonHandler(ActionEvent event) {
     	
     	
     	
     	FXMLLoader nloader = new FXMLLoader(Main.class.getResource("GraduationTable.fxml"));
+    	FXMLLoader mloader = new FXMLLoader(Main.class.getResource("GraduationPieChart.fxml"));
     	try {
+    		AnchorPane gradPieChart = (AnchorPane)mloader.load();
+    		GraduationChartController mController = mloader.getController();
+    		mController.setStudentList(sList);
+    		headerBox.getChildren().setAll(gradPieChart);
 			AnchorPane m_gradTable = (AnchorPane)nloader.load();
 			GraduationTableConstroller nController = nloader.getController();
 	    	nController.setStudentList(sList);
@@ -172,6 +185,7 @@ public class AcademicAdvisingController {
     }
     
 
+    //Action event for new Student menue
     @FXML
     void newStudentMenuItemHandler(ActionEvent event) {
     	try {
@@ -191,15 +205,20 @@ public class AcademicAdvisingController {
 		}
     }
 
+    
+    // initialise
+    
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert newStudentMenu != null : "fx:id=\"newStudentMenu\" was not injected: check your FXML file 'AcademicAdvising.fxml'.";
+        
+        //Get Data
         sList = new StudentList("Academic.txt");
  
         		
         		
         
-     
+     //Set call back for editing cells
 		Callback<TableColumn<Student,String>, TableCell<Student,String>> cellFactory = new Callback<TableColumn<Student, String>, TableCell<Student,String>>() {
             @Override
             public TableCell<Student,String> call(TableColumn<Student,String> p) {
@@ -208,7 +227,7 @@ public class AcademicAdvisingController {
         };
         
         
-       
+       //Assign callbacks and data to columns
         ColFName.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
         ColFName.setCellFactory(cellFactory);
         colLName.setCellValueFactory(cellData-> cellData.getValue().getLastNameProperty());
@@ -247,10 +266,10 @@ public class AcademicAdvisingController {
         
        advisingTable.setEditable(true);
            
-       setPieChart(sList);
+       
    
      
-       
+       //Action Events for Column cells
        ColFName.setOnEditCommit(new EventHandler<CellEditEvent<Student,String>>(){
     	   @Override
     	   public void handle(CellEditEvent<Student, String> t){
@@ -287,8 +306,11 @@ public class AcademicAdvisingController {
     	   
        });
        
+       //Add data to chart
+       setPieChart(sList);
        
        
+       //Add Change listener to data for piecharts
        sList.getStudentList().addListener(new ListChangeListener<Student>(){
     	   
     	   @Override
@@ -335,6 +357,7 @@ public class AcademicAdvisingController {
        
     }
     
+    //Piechart data set up
     public void setPieChart(StudentList sList){
         
         int advised = 0;

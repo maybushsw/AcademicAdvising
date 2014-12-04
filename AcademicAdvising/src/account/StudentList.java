@@ -23,11 +23,16 @@ import javafx.util.Callback;
 
 
 public class StudentList {
+	
+	//Data structure to hold list
     
     private ObservableList<Student> lList = null;
     private String sDbFileName = "Academic.txt";
    
     public StudentList () {
+    	
+    	
+    	//Set up calls for boolean properties to trigger change notifications
         lList = FXCollections.<Student>observableArrayList(new Callback<Student, Observable[]>() {
             @Override
             public Observable[] call(Student eStudent) {
@@ -36,7 +41,7 @@ public class StudentList {
           });
         
       
-        
+        //get the data from the file
         try
         {
             getStudentListFromFile(sDbFileName);
@@ -49,6 +54,7 @@ public class StudentList {
      
     }
     
+    //overloaded constructor
     public StudentList (String a_sFileName) {
         lList = FXCollections.<Student>observableArrayList(new Callback<Student, Observable[]>() {
             @Override
@@ -72,6 +78,8 @@ public class StudentList {
     	
     	return lList;
     }
+    
+    //Parse File
     
     private void getStudentListFromFile(String a_sFileName) throws IOException {
         File inFile = new File(a_sFileName);
@@ -133,6 +141,7 @@ public class StudentList {
         }
     }
 
+    //Write student to file
     private void writeStudentToFile(Student a_student, String a_sFileName) {
         
         try
@@ -150,6 +159,8 @@ public class StudentList {
         }
     }
     
+    
+    //write List to file
     public void writeStudentListToFile(String a_sFileName) {
         
         try
@@ -173,11 +184,14 @@ public class StudentList {
         }
     }
     
+    
+    //Add a stuydent to the list
     public void Add(Student a_student) {
         lList.add(a_student);
         writeStudentToFile(a_student, sDbFileName) ;
     }
     
+    //Update a student in the list
     public boolean UpdateStudent(String a_sStudentId, String a_sNewValue, int a_iField) {
         
         boolean bRet = false;
@@ -211,6 +225,8 @@ public class StudentList {
         return bRet ;
     }
     
+    
+    //Print list
     public void PrintList() {
         Iterator<Student> itr = lList.iterator();
         

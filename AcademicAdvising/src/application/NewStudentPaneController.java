@@ -56,6 +56,9 @@ public class NewStudentPaneController {
 	    
 	    private StudentList sList;
 	    
+	    
+	    //Public methods for data exchange and dependency injection
+	    
 	    public void setStudentList(StudentList mList){
 	    	
 	    	sList = mList;
@@ -73,6 +76,7 @@ public class NewStudentPaneController {
 	    
 	 
 	    
+	    //action event for new Student save
 	    @FXML
 	    void newStudentButtonHandler(ActionEvent event) {
 	    	
@@ -94,7 +98,9 @@ public class NewStudentPaneController {
 	        assert newSGrade != null : "fx:id=\"newSGrade\" was not injected: check your FXML file 'NewStudent.fxml'.";
 	        assert newSLastName != null : "fx:id=\"newSLastName\" was not injected: check your FXML file 'NewStudent.fxml'.";
 	        assert newStudentPane != null : "fx:id=\"newStudentPane\" was not injected: check your FXML file 'NewStudent.fxml'.";
-
+	        
+	        
+	        //Populate dropdown selection list.
 	        newSGrade.setItems(FXCollections.observableArrayList(
         	    "Freshman", "Sophmore", "Junior", "Senior"));
 	        

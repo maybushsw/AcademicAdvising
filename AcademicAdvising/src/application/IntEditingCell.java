@@ -22,6 +22,8 @@ public class IntEditingCell extends TableCell<Student,Integer> {
     private TextField textField;
     public IntEditingCell() {
     }
+    
+    //Override start edit function of tablecell to create a texfield to edit
     @Override
     public void startEdit() {
         super.startEdit();
@@ -41,13 +43,16 @@ public class IntEditingCell extends TableCell<Student,Integer> {
       
     }
     
+  //cancel edit function override in table cell
     @Override
     public void cancelEdit() {
         super.cancelEdit();
         setText( getItem().toString());
         setContentDisplay(ContentDisplay.TEXT_ONLY);
     }
+   
     
+  //Override updateItem of tableCell to update the texfield
     @Override
     public void updateItem(Integer item, boolean empty) {
         super.updateItem(item, empty);
@@ -67,6 +72,8 @@ public class IntEditingCell extends TableCell<Student,Integer> {
             }
         }
     }
+    
+    //Private helper function to create a text field that is edited on mouse double click
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
@@ -100,11 +107,9 @@ public class IntEditingCell extends TableCell<Student,Integer> {
         private String getString() {
             return getItem() == null ? "" : getItem().toString();
         }
-        /**
-         *
-         * @param forward true gets the column to the right, false the column to the left of the current column
-         * @return
-         */
+       
+        
+      //Private method for tabbing next
         private TableColumn<Student, ?> getNextColumn(boolean forward) {
             List<TableColumn<Student, ?>> columns = new ArrayList<>();
             for (TableColumn<Student, ?> column : getTableView().getColumns()) {
@@ -130,10 +135,12 @@ public class IntEditingCell extends TableCell<Student,Integer> {
             return columns.get(nextIndex);
         }
          
+        
+        //private helper function to get editable leaves.
         private List<TableColumn<Student, ?>> getLeaves(TableColumn<Student, ?> root) {
             List<TableColumn<Student, ?>> columns = new ArrayList<>();
             if (root.getColumns().isEmpty()) {
-                //We only want the leaves that are editable.
+               
                 if (root.isEditable()) {
                     columns.add(root);
                 }

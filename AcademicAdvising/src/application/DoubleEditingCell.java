@@ -20,8 +20,12 @@ import account.Student;
 public class DoubleEditingCell extends TableCell<Student,Double> {
 	
     private TextField textField;
+    
+    
     public DoubleEditingCell() {
     }
+    
+    //Override start edit function of tablecell to create a texfield to edit
     @Override
     public void startEdit() {
         super.startEdit();
@@ -41,6 +45,8 @@ public class DoubleEditingCell extends TableCell<Student,Double> {
       
     }
     
+    
+    //cancel edit function override in table cell
     @Override
     public void cancelEdit() {
         super.cancelEdit();
@@ -48,6 +54,8 @@ public class DoubleEditingCell extends TableCell<Student,Double> {
         setContentDisplay(ContentDisplay.TEXT_ONLY);
     }
     
+    
+    //Override updateItem of tableCell to update the texfield
     @Override
     public void updateItem(Double item, boolean empty) {
         super.updateItem(item, empty);
@@ -67,6 +75,8 @@ public class DoubleEditingCell extends TableCell<Student,Double> {
             }
         }
     }
+    
+    //Private helper function to create a text field that is edited on mouse double click
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
@@ -100,17 +110,16 @@ public class DoubleEditingCell extends TableCell<Student,Double> {
         private String getString() {
             return getItem() == null ? "" : getItem().toString();
         }
-        /**
-         *
-         * @param forward true gets the column to the right, false the column to the left of the current column
-         * @return
-         */
+       
+        
+        
+        //Private method for tabbing next
         private TableColumn<Student, ?> getNextColumn(boolean forward) {
             List<TableColumn<Student, ?>> columns = new ArrayList<>();
             for (TableColumn<Student, ?> column : getTableView().getColumns()) {
                 columns.addAll(getLeaves(column));
             }
-            //There is no other column that supports editing.
+           
             if (columns.size() < 2) {
                 return null;
             }
@@ -129,11 +138,12 @@ public class DoubleEditingCell extends TableCell<Student,Double> {
             }
             return columns.get(nextIndex);
         }
-         
+        
+        //private helper method
         private List<TableColumn<Student, ?>> getLeaves(TableColumn<Student, ?> root) {
             List<TableColumn<Student, ?>> columns = new ArrayList<>();
             if (root.getColumns().isEmpty()) {
-                //We only want the leaves that are editable.
+                
                 if (root.isEditable()) {
                     columns.add(root);
                 }

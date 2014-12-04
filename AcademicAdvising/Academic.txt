@@ -1,5 +1,5 @@
-John,H.,William,V00200,Freshman,true,12/03/2014,0,0,12/03/2014,0.0,0.0,true
-John,T.,Scott,V00238,Freshman,false,,0,0,12/03/2014,0.0,0.0,true
-Test,,Test,Test,Freshman,true,12/03/2014,0,0,,0.0,0.0,false
-Test3,,Test2,Test2,Freshman,true,12/03/2014,0,0,,0.0,0.0,false
+Mary,H.,William,V00200,Freshman,true,12/03/2014,0,0,12/03/2014,0.0,2.8,true
+John,T.,Scott,V00238,Freshman,false,,0,0,12/04/2014,0.0,0.0,true
+Test,,Test,Test,Freshman,true,12/04/2014,0,0,,0.0,0.0,false
+Test3,,Test2,Test2,Freshman,false,,0,0,12/04/2014,0.0,0.0,true
 Shawn,,Maybush,V011911,Junior,true,12/03/2014,0,0,,0.0,0.0,false
