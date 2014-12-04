@@ -31,11 +31,6 @@
                       <MenuItem fx:id="graduationMenuButton" mnemonicParsing="false" onAction="#graduationMenuButtonHandler" text="Graduation Report" />
                     </items>
                   </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
               </menus>
             </MenuBar>
          </children>
