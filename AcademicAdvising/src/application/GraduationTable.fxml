@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="gradPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GraduationTableConstroller">
+   <children>
+      <TableView fx:id="gradTable" layoutX="-73.0" layoutY="-135.0" prefHeight="200.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="colGFirstName" prefWidth="75.0" text="First Name" />
+          <TableColumn fx:id="colGLastNmae" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="colGStudentID" prefWidth="75.0" text="VID" />
+            <TableColumn fx:id="colGMajorGPA" prefWidth="75.0" text="Major GPA" />
+            <TableColumn fx:id="colGTotalGPA" prefWidth="75.0" text="Total GPA" />
+            <TableColumn fx:id="colGUpperCredits" prefWidth="75.0" text="Upper Level Credits" />
+            <TableColumn fx:id="colGTotalCredits" prefWidth="75.0" text="Total Credits" />
+            <TableColumn fx:id="colAppSubmit" prefWidth="75.0" text="Application Submitted" />
+            <TableColumn fx:id="colGSubDate" prefWidth="75.0" text="Submission Date" />
+            <TableColumn fx:id="colGDelete" prefWidth="75.0" text="Delete" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>

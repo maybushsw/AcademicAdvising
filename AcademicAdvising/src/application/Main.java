@@ -55,6 +55,7 @@ public class Main extends Application {
             primaryStage.setTitle("Academic Advising");
             primaryStage.show();
             
+            
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
             	
             	@Override

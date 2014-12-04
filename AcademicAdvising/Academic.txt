@@ -1,4 +1,5 @@
-Alex,T.,Scott,V00238,Freshman,true,
-May,W.,Smith,V00547,Junior,true,10/02/2014
-Jason,N.,White,V00879,Senior,true,10/05/2014
-John,H.,William,V00200,Freshman,false,
+John,H.,William,V00200,Freshman,true,12/03/2014,0,0,12/03/2014,0.0,0.0,true
+John,T.,Scott,V00238,Freshman,false,,0,0,12/03/2014,0.0,0.0,true
+Test,,Test,Test,Freshman,true,12/03/2014,0,0,,0.0,0.0,false
+Test3,,Test2,Test2,Freshman,true,12/03/2014,0,0,,0.0,0.0,false
+Shawn,,Maybush,V011911,Junior,true,12/03/2014,0,0,,0.0,0.0,false

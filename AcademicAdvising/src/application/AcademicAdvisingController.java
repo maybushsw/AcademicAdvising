@@ -4,29 +4,39 @@ package application;
  * Sample Skeleton for 'AcademicAdvising.fxml' Controller Class
  */
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import javax.swing.event.DocumentEvent.EventType;
+
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener.Change;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import account.Student;
 import account.StudentList;
@@ -52,6 +62,14 @@ public class AcademicAdvisingController {
     	headerBox = (HBox) myBox;
     }
     
+    
+    
+    @FXML
+    private MenuItem advisingMenuButon;
+
+    @FXML
+    private MenuItem graduationMenuButton;
+    
     @FXML
     private TableView<Student> advisingTable;
     
@@ -72,27 +90,86 @@ public class AcademicAdvisingController {
     
     @FXML
     private TableColumn<Student, String> colDate;
-
-
-
-
-    
-    
-    
-    
-    
-   
-    
     
     @FXML
+    private TableColumn<Student, Boolean> colDelete;
+
+    @FXML
+    private PieChart advisingChart;
+    
+    @FXML
+    private HBox tableBox;
+    
+       
+    @FXML
     private StudentList sList;
+    
+    @FXML
+    private AnchorPane mainWindow;
+    
+    @FXML
+    private MenuItem importMenuItem;
+    
+    
+    
+    public void setStudentList(StudentList mList){
+    	
+    	sList = mList;
+    }
     
     public StudentList getData(){
     	
     	return sList;
     }
     
+
+    @FXML
+    void importMenuItemHandler(ActionEvent event) {
+    	
+    	final FileChooser fChooser = new FileChooser();
+    	File iFile = fChooser.showOpenDialog(tableBox.getScene().getWindow());
+    	
+    	if(iFile != null){
+    		
+    		StudentList myStudentList = new StudentList(iFile.getPath());
+    		sList.getStudentList().addAll(myStudentList.getStudentList());
+    	}
+    	
+    	
+
+    }
     
+    @FXML
+    void advisingMenuButtonHandler(ActionEvent event) {
+    	
+   
+    tableBox.getChildren().clear();
+    tableBox.getChildren().setAll(advisingTable);
+    
+    
+   
+
+    }
+
+    @FXML
+    void graduationMenuButtonHandler(ActionEvent event) {
+    	
+    	
+    	
+    	FXMLLoader nloader = new FXMLLoader(Main.class.getResource("GraduationTable.fxml"));
+    	try {
+			AnchorPane m_gradTable = (AnchorPane)nloader.load();
+			GraduationTableConstroller nController = nloader.getController();
+	    	nController.setStudentList(sList);
+	    	tableBox.getChildren().setAll(m_gradTable);
+	    	HBox.setHgrow(tableBox.getScene().lookup("#gradPane"), Priority.ALWAYS);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+
+    }
     
 
     @FXML
@@ -117,16 +194,21 @@ public class AcademicAdvisingController {
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert newStudentMenu != null : "fx:id=\"newStudentMenu\" was not injected: check your FXML file 'AcademicAdvising.fxml'.";
+        sList = new StudentList("Academic.txt");
+ 
+        		
+        		
         
+     
 		Callback<TableColumn<Student,String>, TableCell<Student,String>> cellFactory = new Callback<TableColumn<Student, String>, TableCell<Student,String>>() {
             @Override
             public TableCell<Student,String> call(TableColumn<Student,String> p) {
                 return new EditingCell();
             }
         };
-        sList = new StudentList("Academic.txt");
         
         
+       
         ColFName.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
         ColFName.setCellFactory(cellFactory);
         colLName.setCellValueFactory(cellData-> cellData.getValue().getLastNameProperty());
@@ -139,30 +221,50 @@ public class AcademicAdvisingController {
         colAA.setCellFactory(cellData -> new CheckBoxTableCell<>());
         colDate.setCellValueFactory(cellData-> cellData.getValue().getAdvisingDateProperty());
         
+        
+        
+       
+        
+        colDelete.setCellValueFactory(
+        		new Callback<TableColumn.CellDataFeatures<Student, Boolean>,
+        		ObservableValue<Boolean>>() {
+        		 
+        		@Override
+        		public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Student, Boolean> p) {
+        		return new SimpleBooleanProperty(p.getValue() != null);
+        		}
+        		}); 
+        colDelete.setCellFactory(
+        		new Callback<TableColumn<Student, Boolean>, TableCell<Student, Boolean>>() {
+        		 
+        		@Override
+        		public TableCell<Student, Boolean> call(TableColumn<Student, Boolean> p) {
+        		return new ButtonCell(sList);
+        		}
+        		}); 
+        
         advisingTable.setItems(sList.getStudentList());
         
        advisingTable.setEditable(true);
-       
-       
-       
-       
+           
+       setPieChart(sList);
+   
      
        
        ColFName.setOnEditCommit(new EventHandler<CellEditEvent<Student,String>>(){
     	   @Override
     	   public void handle(CellEditEvent<Student, String> t){
     		   ((Student) t.getTableView().getItems().get(t.getTablePosition().getRow())).setFirstName(t.getNewValue());
-    		   sList.PrintList();
-    	   }
-    	   
-    	  
-    	   
+    		  
+    		   
+    	   }  
        });
        
        colLName.setOnEditCommit(new EventHandler<CellEditEvent<Student,String>>(){
     	   @Override
     	   public void handle(CellEditEvent<Student, String> t){
     		   ((Student) t.getTableView().getItems().get(t.getTablePosition().getRow())).setLastName(t.getNewValue());
+    		   
     	   }
     	   
        });
@@ -171,6 +273,7 @@ public class AcademicAdvisingController {
     	   @Override
     	   public void handle(CellEditEvent<Student, String> t){
     		   ((Student) t.getTableView().getItems().get(t.getTablePosition().getRow())).setStudentId(t.getNewValue());
+    		   
     	   }
     	   
        });
@@ -179,16 +282,78 @@ public class AcademicAdvisingController {
     	   @Override
     	   public void handle(CellEditEvent<Student, String> t){
     		   ((Student) t.getTableView().getItems().get(t.getTablePosition().getRow())).setGrade(t.getNewValue());
+    		   
     	   }
     	   
        });
        
        
        
+       sList.getStudentList().addListener(new ListChangeListener<Student>(){
+    	   
+    	   @Override
+    	   public void onChanged(ListChangeListener.Change<? extends Student> change){
+    		   
+    		  
+    		   
+    		   while(change.next()){
+    			   
+    			   if(change.wasUpdated()){
+    				   
+    				   Student stu = sList.getStudentList().get(change.getFrom());
+    				   if(stu.getAdvising()){
+    				   DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+    				   
+    				   
+    				   sList.getStudentList().get(change.getFrom()).setAdvisingDate(dateFormat.format(new Date()));
+    				   setPieChart(sList);
+    				   }
+    				   else{
+    					   sList.getStudentList().get(change.getFrom()).setAdvisingDate(""); 
+    					   setPieChart(sList);
+    				   }
+    				   
+    				   if(stu.getGradSubmit()){
+    					   
+    					   DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+    					   sList.getStudentList().get(change.getFrom()).setGradSubmissionDate(dateFormat.format(new Date()));
+    					   
+    				   }
+    				   
+    				   else{
+    					   
+    					   sList.getStudentList().get(change.getFrom()).setGradSubmissionDate("");
+    				   }
+    			   }
+    		   }
+    		   
+    	   
+    	   }
+       });
+
        
        
     }
     
-    
+    public void setPieChart(StudentList sList){
+        
+        int advised = 0;
+        int total = sList.getStudentList().size();
+        
+        for(Student n: sList.getStudentList()){
+     	   
+     	  if(n.getAdvising()){
+     		  advised++;
+     	  }
+        }
+        
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                new PieChart.Data("Advised", advised),
+                new PieChart.Data("Not Advisied", total-advised));
+                
+        advisingChart.setData(pieChartData);
+       
+     }
 }
 

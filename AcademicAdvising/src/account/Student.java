@@ -1,7 +1,10 @@
 package account;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -13,9 +16,19 @@ public class Student {
     private StringProperty sGrade;  
     private BooleanProperty sAdvising;
     private StringProperty sAdvisingDate;
+    private ObjectProperty<Integer> sUpperLevelCredits;
+    private ObjectProperty<Integer> sTotalCredits;
+    private StringProperty sGradSubmissionDate;
+    private ObjectProperty<Double> sMajorGPA;
+    private ObjectProperty<Double> sTotalGPA;
+    private BooleanProperty sGradSubmit;
+    
     
     // constructor
-    public Student(String a_sFirstName, String a_sMiddleName, String a_sLastName, String a_sId, String a_sGrade, Boolean a_sAdvising, String a_sDate) {
+    public Student(String a_sFirstName, String a_sMiddleName, String a_sLastName, String a_sId, String a_sGrade, 
+    		Boolean a_sAdvising, String a_sDate, Integer a_sUpperLevelCredits, Integer a_sTotalCredits, String a_sGradSubmissionDate,
+    		Double a_sMajorGPA, Double a_sTotalGPA, Boolean a_sGradSubmit) {
+    	
         sFirstName = new SimpleStringProperty(a_sFirstName);
         sLastName = new SimpleStringProperty(a_sLastName);
         sMiddleName = new SimpleStringProperty(a_sMiddleName);
@@ -23,14 +36,50 @@ public class Student {
         sGrade = new SimpleStringProperty(a_sGrade);
         sAdvising = new SimpleBooleanProperty(a_sAdvising);
         sAdvisingDate = new SimpleStringProperty(a_sDate);
+        sUpperLevelCredits = new SimpleIntegerProperty(a_sUpperLevelCredits).asObject();
+        sTotalCredits = new SimpleIntegerProperty(a_sTotalCredits).asObject();
+        sGradSubmissionDate = new SimpleStringProperty(a_sGradSubmissionDate);
+        sMajorGPA = new SimpleDoubleProperty(a_sMajorGPA).asObject();
+        sTotalGPA = new SimpleDoubleProperty(a_sTotalGPA).asObject();
+        sGradSubmit = new SimpleBooleanProperty(a_sGradSubmit);
     }
     
     // Setter methods
+    
+    
+    
     public void setFirstName (String a_sFirstName) {
        this.sFirstName.set(a_sFirstName);
     }
    
-    public void setLastName (String a_sLastName) {
+  
+
+	public void setGradSubmit(Boolean sGradSubmit) {
+		this.sGradSubmit.set(sGradSubmit);
+	}
+
+	public void setTotalGPA(Double sTotalGPA) {
+		this.sTotalGPA.set(sTotalGPA);
+	}
+
+
+	public void setMajorGPA(Double sMajorGPA) {
+		this.sMajorGPA.set(sMajorGPA);
+	}
+
+	public void setGradSubmissionDate(String sGradSubmissionDate) {
+		this.sGradSubmissionDate.set(sGradSubmissionDate);
+	}
+
+	public void setTotalCredits(Integer sTotalCredits) {
+		this.sTotalCredits.set(sTotalCredits);
+	}
+
+	public void setUpperLevelCredits(Integer sUpperLevelCredits) {
+		this.sUpperLevelCredits.set(sUpperLevelCredits);
+	}
+
+	public void setLastName (String a_sLastName) {
         this.sLastName.set(a_sLastName);
     }
     
@@ -56,7 +105,63 @@ public class Student {
     }
     
     // Getter methods
-    public String getFirstName () {
+    
+    public BooleanProperty getGradSubmitProperty() {
+  		return sGradSubmit;
+  	}
+      
+      public Boolean getGradSubmit(){
+      	
+      	return sGradSubmit.get();
+      }
+    
+    public ObjectProperty<Integer> getUpperLevelCreditsProperty() {
+  		return sUpperLevelCredits;
+  	}
+    
+    public ObjectProperty<Double> getTotalGPAProperty() {
+		return sTotalGPA;
+	}
+      
+	public Double getTotalGPA() {
+		return sTotalGPA.get();
+	}
+	
+	 public ObjectProperty<Double> getMajorGPAProperty() {
+			return sMajorGPA;
+		}
+	
+	public Double getMajorGPA(){
+		
+		return sMajorGPA.get();
+	}
+
+	public StringProperty getGradSubmissionDateProperty() {
+		return sGradSubmissionDate;
+	}
+	
+	public String getGradSubmissionDate(){
+		
+		return sGradSubmissionDate.get();
+	}
+
+	public Integer getUpperLevelCredits(){
+      	
+      	return sUpperLevelCredits.get();
+    }
+	
+	
+      
+    public ObjectProperty<Integer> getTotalCreditsProperty() {
+		return sTotalCredits;
+	}
+    
+    public Integer getTotalCredits(){
+    	
+    	return sTotalCredits.get();
+    }
+
+	public String getFirstName () {
         return sFirstName.get();
     }
     
@@ -128,6 +233,11 @@ public class Student {
     
     @Override
     public String toString() {
-        return sFirstName.get() + " " + sMiddleName.get() + " " + sLastName.get() + ", " + sStudentId.get() + ", " + sGrade.get() + ", " + sAdvising.get() + ", " + sAdvisingDate.get();
-    }  
+        return sFirstName.get() + " " + sMiddleName.get() + " " + sLastName.get() + ", " + sStudentId.get() + ", " + 
+        		sGrade.get() + ", " + sAdvising.get() + ", " + sAdvisingDate.get() + "," + sUpperLevelCredits.get() + "," +
+        		sTotalCredits.get() + "," + sGradSubmissionDate.get() + "," + sMajorGPA.get() + "," +
+        		sTotalGPA.get() + "," + sGradSubmit.get();
+    }
+
+	 
 }

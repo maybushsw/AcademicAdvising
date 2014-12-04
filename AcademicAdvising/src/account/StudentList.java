@@ -9,8 +9,18 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Scanner;
 
+
+
+
+
+
+
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
+
 
 public class StudentList {
     
@@ -18,7 +28,14 @@ public class StudentList {
     private String sDbFileName = "Academic.txt";
    
     public StudentList () {
-        lList = FXCollections.observableArrayList();
+        lList = FXCollections.<Student>observableArrayList(new Callback<Student, Observable[]>() {
+            @Override
+            public Observable[] call(Student eStudent) {
+              return new Observable[]{eStudent.getAdvisingProperty(),eStudent.getGradSubmitProperty()};
+            }
+          });
+        
+      
         
         try
         {
@@ -28,10 +45,17 @@ public class StudentList {
         {
             System.err.println(ex.getMessage());
         }
+        
+     
     }
     
     public StudentList (String a_sFileName) {
-        lList = FXCollections.observableArrayList();
+        lList = FXCollections.<Student>observableArrayList(new Callback<Student, Observable[]>() {
+            @Override
+            public Observable[] call(Student eStudent) {
+            	return new Observable[]{eStudent.getAdvisingProperty(),eStudent.getGradSubmitProperty()};
+            }
+          });
         sDbFileName = a_sFileName;
         
         try
@@ -70,6 +94,12 @@ public class StudentList {
                 String sGrade  = "";
                 Boolean sAdvice = false;
                 String sDate   = "";
+                Integer sUpperLevelCredits = 0;
+                Integer sTotalCredits = 0;
+                String sGradSubmissionDate = "";
+                Double sMajorGPA = 0.0;
+                Double sTotalGPA = 0.0;
+                Boolean sGradSubmit = false;
                 
                 for (int i = 0; i < studentInfo.length; i++) {
                     switch (i) {
@@ -80,10 +110,17 @@ public class StudentList {
                         case 4: sGrade  = studentInfo[4].substring(0, studentInfo[4].length()); break;
                         case 5: sAdvice = Boolean.valueOf(studentInfo[5].substring(0, studentInfo[5].length())); break;
                         case 6: sDate   = studentInfo[6].substring(0, studentInfo[6].length()); break;
+                        case 7: sUpperLevelCredits =Integer.valueOf(studentInfo[7].substring(0, studentInfo[7].length())); break;
+                        case 8: sTotalCredits = Integer.valueOf(studentInfo[8].substring(0,studentInfo[8].length())); break;
+                        case 9: sGradSubmissionDate = studentInfo[9].substring(0,studentInfo[9].length()); break;
+                        case 10: sMajorGPA = Double.valueOf(studentInfo[10].substring(0, studentInfo[10].length())); break;
+                        case 11: sTotalGPA = Double.valueOf(studentInfo[11].substring(0, studentInfo[11].length())); break;
+                        case 12: sGradSubmit = Boolean.valueOf(studentInfo[12].substring(0, studentInfo[12].length())); break;
                         default: break;
                     }
                 }
-                Student st = new Student(sFName, sMName, sLName, sId, sGrade, sAdvice, sDate);
+                Student st = new Student(sFName, sMName, sLName, sId, sGrade, sAdvice, sDate, sUpperLevelCredits,
+                		sTotalCredits, sGradSubmissionDate, sMajorGPA,sTotalGPA, sGradSubmit);
                 
                 lList.add(st);
             }
@@ -102,7 +139,9 @@ public class StudentList {
         {           
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(a_sFileName, true)));
             out.println(a_student.getFirstName() + "," + a_student.getMiddleName() + "," + a_student.getLastName() + "," +
-                        a_student.getStudentId() + "," + a_student.getGrade() + "," + a_student.getAdvising().toString() + "," + a_student.getAdvisingDate());
+                        a_student.getStudentId() + "," + a_student.getGrade() + "," + a_student.getAdvising().toString() + "," + a_student.getAdvisingDate() + "," +
+                        a_student.getUpperLevelCredits().toString() + "," + a_student.getTotalCredits().toString() + "," +
+                        a_student.getGradSubmissionDate() + "," + a_student.getMajorGPA().toString() + "," + a_student.getTotalGPA().toString() + "," + a_student.getGradSubmit());
             out.close();
         }
         catch (Exception ex)
@@ -121,7 +160,9 @@ public class StudentList {
             while(itr.hasNext()) {
                 Student s = (Student)itr.next(); 
                 out.println(s.getFirstName() + "," + s.getMiddleName() + "," + s.getLastName() + "," +
-                            s.getStudentId() + "," + s.getGrade() + "," + s.getAdvising() + "," + s.getAdvisingDate());
+                            s.getStudentId() + "," + s.getGrade() + "," + s.getAdvising() + "," + s.getAdvisingDate() + "," +
+                			s.getUpperLevelCredits() + "," + s.getTotalCredits() + "," + s.getGradSubmissionDate() + "," +
+                            s.getMajorGPA() + "," + s.getTotalGPA() + "," + s.getGradSubmit());
             }  
         
             out.close();

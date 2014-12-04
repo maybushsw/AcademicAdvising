@@ -1,16 +1,14 @@
 package application;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import account.Student;
 import account.StudentList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -78,7 +76,8 @@ public class NewStudentPaneController {
 	    @FXML
 	    void newStudentButtonHandler(ActionEvent event) {
 	    	
-	    	Student nStudent = new Student(newSFirstName.getText(),"",newSLastName.getText(),newSVID.getText(),newSGrade.getValue().toString(),false,"");
+	    	Student nStudent = new Student(newSFirstName.getText(),"",newSLastName.getText(),newSVID.getText(),newSGrade.getValue().toString(),false,"",
+	    									0,0,"",0.0,0.0, false);
 	    	
 	    	sList.Add(nStudent);
 	    	

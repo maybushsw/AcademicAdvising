@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AcademicAdvisingController">
+<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AcademicAdvisingController">
    <children>
       <HBox fillHeight="false" layoutY="8.0" prefHeight="34.0" prefWidth="640.0" AnchorPane.bottomAnchor="446.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,21 +22,13 @@
                             <MenuItem id="newStudentMenu" fx:id="newStudentMenu" mnemonicParsing="false" onAction="#newStudentMenuItemHandler" text="Student" />
                           </items>
                         </Menu>
-                        <MenuItem mnemonicParsing="false" text="Import" />
-                        <MenuItem mnemonicParsing="false" text="Export" />
-                        <MenuItem mnemonicParsing="false" text="Exit" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Search" />
-                        <MenuItem mnemonicParsing="false" text="Find" />
+                        <MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#importMenuItemHandler" text="Import" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="View">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Advising Report" />
-                      <MenuItem mnemonicParsing="false" text="Graduation Report" />
+                        <MenuItem fx:id="advisingMenuButon" mnemonicParsing="false" onAction="#advisingMenuButtonHandler" text="Advising Report" />
+                      <MenuItem fx:id="graduationMenuButton" mnemonicParsing="false" onAction="#graduationMenuButtonHandler" text="Graduation Report" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -48,7 +40,7 @@
             </MenuBar>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutY="278.0" prefHeight="202.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="278.0">
+      <HBox fx:id="tableBox" alignment="BOTTOM_CENTER" layoutY="278.0" prefHeight="202.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="278.0">
          <children>
             <TableView fx:id="advisingTable" editable="true" prefHeight="124.0" prefWidth="640.0" HBox.hgrow="ALWAYS">
               <columns>
@@ -58,6 +50,7 @@
                   <TableColumn fx:id="colGrade" prefWidth="75.0" text="Grade" />
                   <TableColumn fx:id="colAA" minWidth="85.0" prefWidth="85.0" text="Academic Advising" />
                   <TableColumn fx:id="colDate" minWidth="85.0" prefWidth="85.0" text="Date" />
+                  <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -67,7 +60,7 @@
       </HBox>
       <HBox fx:id="headerBox" alignment="TOP_CENTER" layoutX="246.0" layoutY="33.0" prefHeight="247.0" prefWidth="394.0" style="-fx-background-color: F8B800;" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
          <children>
-            <PieChart prefHeight="222.0" prefWidth="340.0" title="Students Advised" HBox.hgrow="NEVER">
+            <PieChart fx:id="advisingChart" prefHeight="222.0" prefWidth="340.0" title="Students Advised" HBox.hgrow="NEVER">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
